@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hypnofunk.de</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/@alpinejs/ui@3.13.1-beta.0/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/@alpinejs/focus@3.13.1/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.13.1/dist/cdn.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+</head>
+
+<body x-data="videoGallery()" x-init="sortiereNachJahr">
+    <div class="body-wrapper">
+        <div x-data="{ isMobile: window.innerWidth <= 768 }">
+            <div x-show="isMobile">                
+                <nav 
+                    x-data="{ isActive: false }"
+                    class="border-gray-200 bg-[#56e46e] dark:bg-[#56e46e] dark:border-gray-700 w-full"
+                >
+                    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                        <a href="#" class="flex items-center">
+                            <span class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">Hypnofunk.de</span>
+                        </a>
+                        <button 
+                            data-collapse-toggle="navbar-hamburger" 
+                            type="button" 
+                            class="inline-flex items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white dark:text-white dark:hover:bg-[#56e46e] dark:focus:ring-gray-600" 
+                            aria-controls="navbar-hamburger" 
+                            aria-expanded="false"
+                            x-cloak
+                            @click="isActive = !isActive"
+                        >
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                            </svg>
+                        </button>
+                        <div x-show="isActive" class="w-full" id="navbar-hamburger">
+                            <ul class="flex flex-col font-medium mt-4 rounded-lg bg-[#56e46e] dark:bg-[#56e46e] dark:border-gray-700">
+                                <li>
+                                    <a href="#gallery" class="block py-2 pl-3 pr-4 text-white bg-[#56e46e] hover:border hover:border-white" aria-current="page">Start</a>
+                                </li>
+                                <li>
+                                    <a href="#kontakt" class="block py-2 pl-3 pr-4 text-white bg-[#56e46e] hover:border hover:border-white">Kontakt</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>            
+        
+            <div x-show="!isMobile">
+                <header class="bg-[#56e46e] py-5 px-10 w-full fixed">
+                    <nav class="flex justify-between items-center px-5">
+                        <div>
+                            <a href="/" class="text-white text-2xl font-bold">Hypnofunk.de</a>
+                        </div>
+                        <div class="space-x-4">
+                            <a href="#gallery" class="text-white hover:text-gray-400">Home</a>
+                            <a href="#kontakt" class="text-white hover:text-gray-400">Kontakt</a>
+                        </div>
+                    </nav>
+                </header>
+            </div>
+        </div>
+        
+        <div class="w-full flex justify-center items-center">
+            
+        <div class="px-[8px] md:px-4">
+            <section class="pt-20 flex justify-center items-center">
+                <img src="/img/logo.png" alt="Logo" class="max-w-full md:max-w-[800px]">
+            </section>
+            
+            <section id="gallery" class="mb-20 md:pt-20">
+                <h3 class="text-4xl mb-5">Platz fuer eine Ueberschrift</h3>
+                <div class="text-md">
+                    <p>Hier kann Text gesetzt werden.</p>
+                </div>
+                <div id="gallery" class="flex flex-col md:grid md:grid-cols-3 md:gap-4" x-html="galerieHTML"></div>
+            </section>
+    
+            <section id="kontakt" class="mb-10 pt-20">
+                <h3 class="text-4xl mb-5">Kontakt</h3>
+                
+                <div x-data="{ formSubmitted: false }" class="flex items-center justify-center">
+                    <div class="max-w-full w-full bg-white rounded">
+                        <form x-show="!formSubmitted" @submit.prevent="submitForm" class="space-y-4">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-600">Name:</label>
+                                <input type="text" id="name" name="name" required class="mt-1 p-2 w-full border rounded">
+                            </div>
+                
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-600">E-Mail:</label>
+                                <input type="email" id="email" name="email" required class="mt-1 p-2 w-full border rounded">
+                            </div>
+    
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-600">Nachricht:</label>
+                                <textarea id="message" name="message" rows="4" required class="mt-1 p-2 w-full border rounded"></textarea>
+                            </div>
+                
+                            <!-- reCAPTCHA -->
+                            <div class="mt-4">
+                                <div class="g-recaptcha" data-sitekey="6LeeDk8pAAAAAA9z-HW8s-qpmAUk8bji1UT75BUh"> </div>
+                            </div>
+                
+                            <button type="submit" class="w-1/2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Absenden</button>
+                        </form>
+                
+                        <div x-show="formSubmitted" class="mt-4 text-green-700">
+                            <p>Vielen Dank! Das Formular wurde erfolgreich abgesendet.</p>
+                        </div>
+                    </div>
+                
+                    <script>
+                        function submitForm() {
+                            fetch('send_form.php', {
+                                method: 'POST',
+                                body: new FormData(document.querySelector('form')),
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.success) {
+                                    formSubmitted = true;
+                                } else {
+                                    console.error('Fehler beim Formularversand:', data.error);
+                                }
+                            })
+                            .catch(error => console.error('Fehler beim Formularversand:', error));
+                        }
+                    </script>
+                </div>
+            </section>
+        </div>
+        </div>
+
+        <footer class="bg-gray-800 text-white py-5 px-10">
+            <div class="container mx-auto flex justify-end">
+                <div>
+                    <div x-data="{ open: false }" class="flex justify-center">
+                        <!-- Trigger -->
+                        <span x-on:click="open = true">
+                            <p class="cursor-pointer hover:text-gray-400">Impressum</p>
+                        </span>
+
+                        <!-- Modal -->
+                        <div
+                            x-show="open"
+                            style="display: none"
+                            x-on:keydown.escape.prevent.stop="open = false"
+                            role="dialog"
+                            aria-modal="true"
+                            x-id="['modal-title']"
+                            :aria-labelledby="$id('modal-title')"
+                            class="fixed inset-0 z-10 overflow-y-auto"
+                        >
+                            <!-- Overlay -->
+                            <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+
+                            <!-- Panel -->
+                            <div
+                                x-show="open" x-transition
+                                x-on:click="open = false"
+                                class="relative flex min-h-screen items-center justify-center p-4"
+                            >
+                                <div
+                                    x-on:click.stop
+                                    x-trap.noscroll.inert="open"
+                                    class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg"
+                                >
+                                    <!-- Title -->
+                                    <h2 class="text-3xl text-gray-600 font-bold" :id="$id('modal-title')">Impressum</h2>
+
+                                    <!-- Content -->
+                                    <p class="mt-2 text-gray-600">Hier kommt der Impressums Text rein</p>
+
+                                    <!-- Buttons -->
+                                    <div class="mt-8 flex space-x-2">
+                                        <button type="button" x-on:click="open = false" class="rounded-md border border-gray-200 bg-blue-500 px-5 py-2.5">
+                                            zurück
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
+<script>
+
+function videoGallery() {
+    return {
+        videos: [
+            { title: 'Test',
+              jahr: '2002',
+              desc: '',
+              src: './vids/1.mp4', 
+              poster: './vids/posters/testposter.png' 
+            },
+            { title: 'Test',
+              jahr: '2002',
+              desc: '',
+              src: './vids/2.mp4', 
+              poster: './vids/posters/testposter.png'
+            },
+            { title: 'Test',
+              jahr: '2002',
+              desc: '',
+              src: './vids/3.mp4', 
+              poster: './vids/posters/testposter.png'
+            },
+            { title: 'Test',
+              jahr: '2002',
+              desc: '',
+              src: './vids/1.mp4', 
+              poster: './vids/posters/testposter.png'
+            },
+            { title: 'Test',
+              jahr: '2002',
+              desc: '',
+              src: './vids/2.mp4', 
+              poster: './vids/posters/testposter.png'
+            },
+            { title: 'Test',
+              jahr: '2002',
+              desc: '',
+              src: './vids/3.mp4', 
+              poster: './vids/posters/testposter.png'
+            },
+        ],
+        sortiereNachJahr: function () {
+            this.videos.sort(function (a, b) {
+                return b.jahr - a.jahr;
+            });
+        },
+    
+        galerieHTML: function () {
+            const aspectRatio = 16/9;
+            const height = 800;
+            const width = height * aspectRatio;
+
+            return this.videos.map(function (video) {
+                return `
+                    <div x-data="{ open: false }" class="flex justify-center mb-12">
+                        <!-- Trigger -->
+                        <span x-on:click="open = true">
+                            <video controls class="rounded-md cursor-pointer" width="${width}" height="${height}" poster="${video.poster}">
+                                <source src="${video.src}" type="video/mp4">
+                                <p>Ihr Browser unterstützt das Videoformat nicht.</p>
+                            </video>
+                        </span>
+
+                        <!-- Modal -->
+                        <div
+                            x-show="open"
+                            style="display: none"
+                            x-on:keydown.escape.prevent.stop="open = false"
+                            role="dialog"
+                            aria-modal="true"
+                            x-id="['modal-title']"
+                            :aria-labelledby="$id('modal-title')"
+                            class="fixed inset-0 z-10 overflow-y-auto"
+                        >
+                            <!-- Overlay -->
+                            <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+
+                            <!-- Panel -->
+                            <div
+                                x-show="open" x-transition
+                                x-on:click="open = false"
+                                class="relative flex min-h-screen items-center justify-center p-4"
+                            >
+                                <div
+                                    x-on:click.stop
+                                    x-trap.noscroll.inert="open"
+                                    class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg"
+                                >
+                                    <!-- Title -->
+                                    <h2 class="text-2xl font-bold" :id="$id('modal-title')">${video.title}</h2>
+
+                                    <!-- Content -->
+                                    <video controls class="rounded-md" width="400" height="300">
+                                        <source src="${video.src}" type="video/mp4">
+                                        <p>Ihr Browser unterstützt das Videoformat nicht.</p>
+                                    </video>
+                                    <div>
+                                        <p class="mt-2 text-gray-600 truncate">${video.desc}</p>
+                                        <p class="mt-2 text-gray-600"><span class="font-bold">Abmessungen: </span>${video.size}</p>
+                                        <p class="mt-2 text-gray-600"><span class="font-bold">Jahr: </span>${video.jahr}</p>
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div class="mt-4 md:mt-8">
+                                        <button type="button" x-on:click="open = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">
+                                            zurück
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+    };
+}
+
+Alpine.data('videoGallery', videoGallery);
+
+// Checks which Viewport
+window.addEventListener('resize', () => {
+    // Überwachen Sie die Bildschirmbreite und aktualisieren Sie den 'isMobile'-Zustand entsprechend
+    if (window.innerWidth <= 768) {
+        Alpine.store('isMobile', true);
+    } else {
+        Alpine.store('isMobile', false);
+    }
+});
+
+</script>
