@@ -30,7 +30,7 @@
                         <button 
                             data-collapse-toggle="navbar-hamburger" 
                             type="button" 
-                            class="inline-flex items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white dark:text-white dark:hover:bg-[#56e46e] dark:focus:ring-gray-600" 
+                            class="inline-flex items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white dark:text-white dark:hover:bg-[#56e46e]" 
                             aria-controls="navbar-hamburger" 
                             aria-expanded="false"
                             x-cloak
@@ -70,75 +70,74 @@
             </div>
         </div>
         
-        <div class="w-full flex justify-center items-center">
-            
-        <div class="px-[8px] md:px-4">
-            <section class="pt-20 flex justify-center items-center">
-                <img src="/img/logo.png" alt="Logo" class="max-w-full md:max-w-[800px]">
-            </section>
-            
-            <section id="gallery" class="mb-20 md:pt-20">
-                <h3 class="text-4xl mb-5">Platz fuer eine Ueberschrift</h3>
-                <div class="text-md">
-                    <p>Hier kann Text gesetzt werden.</p>
-                </div>
-                <div id="gallery" class="flex flex-col md:grid md:grid-cols-3 md:gap-4" x-html="galerieHTML"></div>
-            </section>
-    
-            <section id="kontakt" class="mb-10 pt-20">
-                <h3 class="text-4xl mb-5">Kontakt</h3>
+        <div class="w-full flex justify-center items-center">    
+            <div class="px-[8px] md:px-4">
+                <section class="pt-20 flex justify-center items-center">
+                    <img src="/img/logo.png" alt="Logo" class="max-w-full md:max-w-[800px]">
+                </section>
                 
-                <div x-data="{ formSubmitted: false }" class="flex items-center justify-center">
-                    <div class="max-w-full w-full bg-white rounded">
-                        <form x-show="!formSubmitted" @submit.prevent="submitForm" class="space-y-4">
-                            <div>
-                                <label for="name" class="block text-sm font-medium text-gray-600">Name:</label>
-                                <input type="text" id="name" name="name" required class="mt-1 p-2 w-full border rounded">
-                            </div>
-                
-                            <div>
-                                <label for="email" class="block text-sm font-medium text-gray-600">E-Mail:</label>
-                                <input type="email" id="email" name="email" required class="mt-1 p-2 w-full border rounded">
-                            </div>
-    
-                            <div>
-                                <label for="message" class="block text-sm font-medium text-gray-600">Nachricht:</label>
-                                <textarea id="message" name="message" rows="4" required class="mt-1 p-2 w-full border rounded"></textarea>
-                            </div>
-                
-                            <!-- reCAPTCHA -->
-                            <div class="mt-4">
-                                <div class="g-recaptcha" data-sitekey="6LeeDk8pAAAAAA9z-HW8s-qpmAUk8bji1UT75BUh"> </div>
-                            </div>
-                
-                            <button type="submit" class="w-1/2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Absenden</button>
-                        </form>
-                
-                        <div x-show="formSubmitted" class="mt-4 text-green-700">
-                            <p>Vielen Dank! Das Formular wurde erfolgreich abgesendet.</p>
-                        </div>
+                <section id="gallery" class="mb-20 md:pt-20">
+                    <h3 class="text-4xl mb-5">Platz fuer eine Ueberschrift</h3>
+                    <div class="text-md">
+                        <p>Hier kann Text gesetzt werden.</p>
                     </div>
-                
-                    <script>
-                        function submitForm() {
-                            fetch('send_form.php', {
-                                method: 'POST',
-                                body: new FormData(document.querySelector('form')),
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.success) {
-                                    formSubmitted = true;
-                                } else {
-                                    console.error('Fehler beim Formularversand:', data.error);
-                                }
-                            })
-                            .catch(error => console.error('Fehler beim Formularversand:', error));
-                        }
-                    </script>
-                </div>
-            </section>
-        </div>
+                    <div id="gallery" class="flex flex-col md:grid md:grid-cols-3 md:gap-4" x-html="galerieHTML"></div>
+                </section>
+        
+                <section id="kontakt" class="mb-10 pt-20">
+                    <h3 class="text-4xl mb-5">Kontakt</h3>
+                    
+                    <div x-data="{ formSubmitted: false }" class="flex items-center justify-center">
+                        <div class="max-w-full w-full bg-white rounded">
+                            <form x-show="!formSubmitted" @submit.prevent="submitForm" class="space-y-4">
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-gray-600">Name:</label>
+                                    <input type="text" id="name" name="name" required class="mt-1 p-2 w-full border rounded">
+                                </div>
+                    
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-600">E-Mail:</label>
+                                    <input type="email" id="email" name="email" required class="mt-1 p-2 w-full border rounded">
+                                </div>
+        
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-gray-600">Nachricht:</label>
+                                    <textarea id="message" name="message" rows="4" required class="mt-1 p-2 w-full border rounded"></textarea>
+                                </div>
+                    
+                                <!-- reCAPTCHA -->
+                                <div class="mt-4">
+                                    <div class="g-recaptcha" data-sitekey="6LeeDk8pAAAAAA9z-HW8s-qpmAUk8bji1UT75BUh"> </div>
+                                </div>
+                    
+                                <button type="submit" class="w-1/2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Absenden</button>
+                            </form>
+                    
+                            <div x-show="formSubmitted" class="mt-4 text-green-700">
+                                <p>Vielen Dank! Das Formular wurde erfolgreich abgesendet.</p>
+                            </div>
+                        </div>
+                    
+                        <script>
+                            function submitForm() {
+                                fetch('send_form.php', {
+                                    method: 'POST',
+                                    body: new FormData(document.querySelector('form')),
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        formSubmitted = true;
+                                    } else {
+                                        console.error('Fehler beim Formularversand:', data.error);
+                                    }
+                                })
+                                .catch(error => console.error('Fehler beim Formularversand:', error));
+                            }
+                        </script>
+                    </div>
+                </section>
+            </div>
         </div>
 
         <footer class="bg-gray-800 text-white py-5 px-10">
@@ -260,55 +259,6 @@ function videoGallery() {
                                 <p>Ihr Browser unterstützt das Videoformat nicht.</p>
                             </video>
                         </span>
-
-                        <!-- Modal -->
-                        <div
-                            x-show="open"
-                            style="display: none"
-                            x-on:keydown.escape.prevent.stop="open = false"
-                            role="dialog"
-                            aria-modal="true"
-                            x-id="['modal-title']"
-                            :aria-labelledby="$id('modal-title')"
-                            class="fixed inset-0 z-10 overflow-y-auto"
-                        >
-                            <!-- Overlay -->
-                            <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
-
-                            <!-- Panel -->
-                            <div
-                                x-show="open" x-transition
-                                x-on:click="open = false"
-                                class="relative flex min-h-screen items-center justify-center p-4"
-                            >
-                                <div
-                                    x-on:click.stop
-                                    x-trap.noscroll.inert="open"
-                                    class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg"
-                                >
-                                    <!-- Title -->
-                                    <h2 class="text-2xl font-bold" :id="$id('modal-title')">${video.title}</h2>
-
-                                    <!-- Content -->
-                                    <video controls class="rounded-md" width="400" height="300">
-                                        <source src="${video.src}" type="video/mp4">
-                                        <p>Ihr Browser unterstützt das Videoformat nicht.</p>
-                                    </video>
-                                    <div>
-                                        <p class="mt-2 text-gray-600 truncate">${video.desc}</p>
-                                        <p class="mt-2 text-gray-600"><span class="font-bold">Abmessungen: </span>${video.size}</p>
-                                        <p class="mt-2 text-gray-600"><span class="font-bold">Jahr: </span>${video.jahr}</p>
-                                    </div>
-
-                                    <!-- Buttons -->
-                                    <div class="mt-4 md:mt-8">
-                                        <button type="button" x-on:click="open = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">
-                                            zurück
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>`;
             }).join('');
         }
