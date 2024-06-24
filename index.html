@@ -1,252 +1,326 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Hypnofunk.de</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script defer src="https://unpkg.com/@alpinejs/ui@3.13.1-beta.0/dist/cdn.min.js"></script>
-        <script defer src="https://unpkg.com/@alpinejs/focus@3.13.1/dist/cdn.min.js"></script>
-        <script defer src="https://unpkg.com/alpinejs@3.13.1/dist/cdn.min.js"></script>
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-        
-        <link rel="icon" href="/favicon.ico" type="image/x-icon">
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    
-        <link rel="stylesheet" href="styles.css">
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hypnofunk.de</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script
+      defer
+      src="https://unpkg.com/@alpinejs/ui@3.13.1-beta.0/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/@alpinejs/focus@3.13.1/dist/cdn.min.js"
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.13.1/dist/cdn.min.js"
+    ></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-    <body x-data="{ isMobile: window.innerWidth <= 768 }">
-        <div x-cloak class="header-background">
-            <!-- MOBILE NAVBAR -->
-            <div x-show="isMobile">
-                <nav
-                    x-data="{ isActive: false }"
-                    class=""
-                >
-                    <div class="navbar__mobile-container">
-                        <a href="#" class="flex items-center">
-                            <span class="navbar__mobile-title">Hypnofunk.de</span>
-                        </a>
-                        <button 
-                            data-collapse-toggle="navbar-hamburger" 
-                            type="button" 
-                            class="navbar__mobile-hamburger" 
-                            aria-controls="navbar-hamburger" 
-                            aria-expanded="false"
-                            x-cloak
-                            @click="isActive = !isActive"
-                        >
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
-                            </svg>
-                        </button>
-                        <div x-show="isActive" class="w-full" id="navbar-hamburger">
-                            <ul class="navbar__mobile-list">
-                                <li>
-                                    <a class="navbar__mobile-list-item" href="#gallery" aria-current="page">Start</a>
-                                </li>
-                                <li>
-                                    <a class="navbar__mobile-list-item" href="#kontakt">Kontakt</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 
-            <!-- DESKTOP NAVBAR -->
-            <div x-show="!isMobile">
-                <nav class="navbar__desktop">
-                    <div class="navbar__desktop-container">
-                        <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                            <span class="navbar__desktop-title">Hypnofunk</span>
-                        </a>
-                        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-                            <ul class="navbar__desktop-list">
-                                <li>
-                                    <a href="#" class="navbar__desktop-list-item" aria-current="page">Home</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="navbar__desktop-list-item">Kontakt</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body x-data="{ isMobile: window.innerWidth <= 768 }">
+    <div x-cloak class="header-background">
+      <!-- MOBILE NAVBAR -->
+      <div x-show="isMobile">
+        <nav x-data="{ isActive: false }" class="">
+          <div class="navbar__mobile-container">
+            <a href="#" class="flex items-center">
+              <span class="navbar__mobile-title">Hypnofunk.de</span>
+            </a>
+            <button
+              data-collapse-toggle="navbar-hamburger"
+              type="button"
+              class="navbar__mobile-hamburger"
+              aria-controls="navbar-hamburger"
+              aria-expanded="false"
+              x-cloak
+              @click="isActive = !isActive"
+            >
+              <span class="sr-only">Open main menu</span>
+              <svg
+                class="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 17 14"
+              >
+                <path
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M1 1h15M1 7h15M1 13h15"
+                />
+              </svg>
+            </button>
+            <div x-show="isActive" class="w-full" id="navbar-hamburger">
+              <ul class="navbar__mobile-list">
+                <li>
+                  <a
+                    class="navbar__mobile-list-item"
+                    href="#gallery"
+                    aria-current="page"
+                    >Start</a
+                  >
+                </li>
+                <li>
+                  <a class="navbar__mobile-list-item" href="#kontakt"
+                    >Kontakt</a
+                  >
+                </li>
+              </ul>
             </div>
+          </div>
+        </nav>
+      </div>
+
+      <!-- DESKTOP NAVBAR -->
+      <div x-show="!isMobile">
+        <nav class="navbar__desktop">
+          <div class="navbar__desktop-container">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+              <span class="navbar__desktop-title">Hypnofunk</span>
+            </a>
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+              <ul class="navbar__desktop-list">
+                <li>
+                  <a
+                    href="#"
+                    class="navbar__desktop-list-item"
+                    aria-current="page"
+                    >Home</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="navbar__desktop-list-item">Kontakt</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div
+      x-data="videoGallery()"
+      x-init="sortiereNachYear"
+      class="body-background"
+    >
+      <!-- FEATURE TEASER -->
+      <section class="feature-teaser__container">
+        <div class="feature-teaser__info">
+          <h3>See through your inner Eye</h3>
+          <div>
+            <p>
+              Solange der Hypnosefunk sendet und keiner die Techniken der
+              Manipulation und Propaganda kennt, wird jeder denken, dass die
+              Lüge die Wahrheit ist.
+            </p>
+          </div>
         </div>
+        <br />
+        <div class="feature-teaser__logo">
+          <img src="./img/logo.jpg" alt="Hypnofunk Logo" />
+        </div>
+      </section>
 
-        <!-- MAIN CONTENT -->
-        <div 
-            x-data="videoGallery()" 
-            x-init="sortiereNachYear"
-            class="body-background"
-        >
-        
-            <!-- FEATURE TEASER -->
-            <section class="feature-teaser__container">
-                <div class="feature-teaser__info">
-                    <h3>See through your inner Eye</h3>
-                    <div>
-                        <p>Solange der Hypnosefunk sendet und keiner die Techniken der Manipulation und Propaganda kennt, wird jeder denken, dass die Lüge die Wahrheit ist.</p>
-                    </div>
-                </div>
-                <br>
-                <div class="feature-teaser__logo">
-                    <img src="./img/logo.jpg" alt="Hypnofunk Logo">
-                </div>
+      <!-- TIMELINE & GALLERY DESKTOP -->
+      <div x-show="!isMobile">
+        <section x-data="{ showTimeline: true }" class="timeline__container">
+          <!-- TOGGLE BUTTON GROUP-->
+          <div class="toggle-group__container" role="group">
+            <button
+              @click="showTimeline = true"
+              type="button"
+              class="toggle-group__btn"
+            >
+              <svg
+                class="w-3 h-3 me-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"
+                />
+              </svg>
+              Timeline
+            </button>
+            <button
+              @click="showTimeline = false"
+              type="button"
+              class="toggle-group__btn"
+            >
+              <svg
+                class="w-3 h-3 me-2"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"
+                />
+                <path
+                  d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                />
+              </svg>
+              Gallery
+            </button>
+          </div>
+
+          <!-- Div mit Toggle-Funktion -->
+          <div x-show="showTimeline">
+            <div class="timeline__body">
+              <ol
+                id="gallery"
+                class="relative border-s border-gray-200 dark:border-gray-700 py-5"
+                x-html="timelineGallery"
+              ></ol>
+            </div>
+          </div>
+
+          <div x-show="!showTimeline">
+            <section id="gallery" class="mb-20 md:pt-20">
+              <div
+                id="gallery"
+                class="flex flex-col md:grid md:grid-cols-3 md:gap-4"
+                x-html="galerieHTML"
+              ></div>
             </section>
+          </div>
+        </section>
+      </div>
 
-            <!-- TIMELINE & GALLERY DESKTOP -->
-            <div x-show="!isMobile">
-                <section x-data="{ showTimeline: true }" class="timeline__container">
-                    <!-- TOGGLE BUTTON GROUP-->
-                    <div class="toggle-group__container" role="group">
-                        <button 
-                            @click="showTimeline = true" 
-                            type="button" 
-                            class="toggle-group__btn"
-                        >
-                        <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
-                        </svg>
-                        Timeline
-                        </button>
-                        <button 
-                        @click="showTimeline = false" 
-                        type="button" 
-                        class="toggle-group__btn">
-                        <svg class="w-3 h-3 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                            <path d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z"/>
-                            <path d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
-                        </svg>
-                        Gallery
-                        </button>
-                    </div>
-                    
-                    <!-- Div mit Toggle-Funktion -->
-                    <div x-show="showTimeline">
-                        <div class="timeline__body">
-                            <ol id="gallery" class="relative border-s border-gray-200 dark:border-gray-700 py-5" x-html="timelineGallery">
-                            </ol>
-                        </div>
-                    </div>
-                
-                    <div x-show="!showTimeline">
-                        <section id="gallery" class="mb-20 md:pt-20">
-                            <div id="gallery" class="flex flex-col md:grid md:grid-cols-3 md:gap-4" x-html="galerieHTML"></div>
-                        </section>
-                    </div>
-                </section>
-            </div>
+      <!-- MINIMAL TIMELINE MOBILE -->
+      <div x-show="isMobile">
+        <section class="mobile-timeline__container mx-4">
+          <ol id="gallery" x-html="minimalTimelineGallery"></ol>
+        </section>
+      </div>
 
-            <!-- MINIMAL TIMELINE MOBILE -->
-            <div x-show="isMobile">
-                <section class="mobile-timeline__container mx-4">
-                    <ol id="gallery" 
-                        x-html="minimalTimelineGallery">
-                    </ol>
-                </section>
-            </div>
-
-
-            <footer>
-                <div class="footer__container">
-                    <span>© <span id="currentYear"></span> <a href="https://hypnofunk.de/" class="hover:underline">Hypnofunk</a>. All Rights Reserved.
-                    </span>
-                    <span>Coded with ❤️</span>
-                    <ul>
-                        <li>
-                            <a href="#" class="hover:underline me-4 md:me-6">Impressum</a>
-                        </li>
-                        <li>
-                            <a href="#" class="hover:underline">Kontakt</a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
-
+      <footer>
+        <div class="footer__container">
+          <span
+            >© <span id="currentYear"></span>
+            <a href="https://hypnofunk.de/" class="hover:underline">Hypnofunk</a
+            >. All Rights Reserved.
+          </span>
+          <span>Coded with ❤️</span>
+          <ul>
+            <li>
+              <a href="#" class="hover:underline me-4 md:me-6">Impressum</a>
+            </li>
+            <li>
+              <a href="#" class="hover:underline">Kontakt</a>
+            </li>
+          </ul>
         </div>
-    </body>
+      </footer>
+    </div>
+  </body>
 </html>
 
 <script>
-
-function getCurrentYear() {
+  function getCurrentYear() {
     const date = new Date();
     return date.getFullYear();
-}
+  }
 
-document.addEventListener("DOMContentLoaded", function() {
+  document.addEventListener("DOMContentLoaded", function () {
     const yearSpan = document.getElementById("currentYear");
     yearSpan.textContent = getCurrentYear();
-});
+  });
 
+  function loadVideo(container) {
+    const img = container.querySelector("img");
+    const video = container.querySelector("video");
 
-function videoGallery() {
+    img.style.display = "none";
+    video.style.display = "block";
+    video.play();
+  }
+
+  function videoGallery() {
     return {
-        videos: [
-            { title: 'Nudging',
-                year: '2024',
-                month:'April',
-                day: '8',
-                desc: 'Nudging ist eine Strategie, mit der Menschen dazu bewegt werden, sich für eine bestimmte Verhaltensweise zu entscheiden, ohne dass sie es bemerken.',
-                src: './vids/Nudging.mp4', 
-                poster: './vids/Nudging.png' 
-            },
-            { title: 'Gaslighting',
-                year: '2024',
-                month:'April',
-                day: '15',
-                desc: 'Gaslighting ist eine Form von psychischer Gewalt, bei der die Opfer durch Lügen, Leugnen und Einschüchterung manipuliert werden.',
-                src: './vids/Gaslighting.mp4', 
-                poster: './vids/Gaslighting.png'
-            },
-            { title: 'Verschwörungstheorien',
-                year: '2024',
-                month:'April',
-                day: '22',
-                desc: 'Als Verschwörungstheorien werden heutzutage Ansichten bezeichnet, die mit einer Verschwörung im eigentlichen Sinn nichts zu tun haben. Man benutzt das Wort als Kampfbegriff, um unliebsame Meinungen in ein schlechtes Licht zu rücken.',
-                src: './vids/Verschwoerungstheorien.mp4', 
-                poster: './vids/Verschwoerungstheorien.png'
-            },
-            { title: 'Framing',
-                year: '2024',
-                month:'Mai',
-                day: '2',
-                desc: 'Framing ist das Einrahmen eines Sachverhaltes, der im Sinne der eigenen Interessen interpretiert und dargestellt werden soll.',
-                src: './vids/Framing.mp4', 
-                poster: './vids/Framing.png'
-            },
-            { title: 'Gustave Le Bon - "Psychologie der Massen"',
-                year: '2024',
-                month:'Mai',
-                day: '11',
-                desc: 'Eine unverzichtbare Lektüre in diesen Zeiten. Es wird viel darüber geredet, man sollte sie aber auch unbedingt selbst lesen, um den Wahnsinn, der uns umgibt, besser zu verstehen.<br><br>Das Buch erschien 1895 und hat an Aktualität nicht verloren.',
-                src: './vids/GustaveLeBon.mp4', 
-                poster: './vids/GustaveLeBon.png'
-            },
-       ],
-        sortiereNachYear: function () {
-            this.videos.sort(function (a, b) {
-                return b.year - a.year;
-            });
+      videos: [
+        {
+          title: "Nudging",
+          year: "2024",
+          month: "April",
+          day: "8",
+          desc: "Nudging ist eine Strategie, mit der Menschen dazu bewegt werden, sich für eine bestimmte Verhaltensweise zu entscheiden, ohne dass sie es bemerken.",
+          src: "./vids/Nudging.mp4",
+          poster: "./vids/Nudging.png",
         },
+        {
+          title: "Gaslighting",
+          year: "2024",
+          month: "April",
+          day: "15",
+          desc: "Gaslighting ist eine Form von psychischer Gewalt, bei der die Opfer durch Lügen, Leugnen und Einschüchterung manipuliert werden.",
+          src: "./vids/Gaslighting.mp4",
+          poster: "./vids/Gaslighting.png",
+        },
+        {
+          title: "Verschwörungstheorien",
+          year: "2024",
+          month: "April",
+          day: "22",
+          desc: "Als Verschwörungstheorien werden heutzutage Ansichten bezeichnet, die mit einer Verschwörung im eigentlichen Sinn nichts zu tun haben. Man benutzt das Wort als Kampfbegriff, um unliebsame Meinungen in ein schlechtes Licht zu rücken.",
+          src: "./vids/Verschwoerungstheorien.mp4",
+          poster: "./vids/Verschwoerungstheorien.png",
+        },
+        {
+          title: "Framing",
+          year: "2024",
+          month: "Mai",
+          day: "2",
+          desc: "Framing ist das Einrahmen eines Sachverhaltes, der im Sinne der eigenen Interessen interpretiert und dargestellt werden soll.",
+          src: "./vids/Framing.mp4",
+          poster: "./vids/Framing.png",
+        },
+        {
+          title: 'Gustave Le Bon - "Psychologie der Massen"',
+          year: "2024",
+          month: "Mai",
+          day: "11",
+          desc: "Eine unverzichtbare Lektüre in diesen Zeiten. Es wird viel darüber geredet, man sollte sie aber auch unbedingt selbst lesen, um den Wahnsinn, der uns umgibt, besser zu verstehen.<br><br>Das Buch erschien 1895 und hat an Aktualität nicht verloren.",
+          src: "./vids/GustaveLeBon.mp4",
+          poster: "./vids/GustaveLeBon.png",
+        },
+      ],
+      sortiereNachYear: function () {
+        this.videos.sort(function (a, b) {
+          return b.year - a.year;
+        });
+      },
 
-        timelineGallery: function () {
-            const aspectRatio = 16 / 9;
-            const height = 800;
-            const width = height * aspectRatio;
+      timelineGallery: function () {
+        const aspectRatio = 16 / 9;
+        const height = 800;
+        const width = height * aspectRatio;
 
-            return this.videos.map(function (video) {
-                return `              
+        return this.videos
+          .map(function (video) {
+            return `              
                         <li class="mb-10">
                             <div class="absolute hidden md:block w-3 h-3 bg-[#163300] rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-[#163300]"></div>
                             <time class="ms-4 mb-1 text-sm font-normal leading-none text-gray-400 dark:text-[#163300]">${video.month} ${video.year}</time>
@@ -265,16 +339,18 @@ function videoGallery() {
                                 </div>
                             </div>    
                         </li>`;
-            }).join('');
-        },
+          })
+          .join("");
+      },
 
-        minimalTimelineGallery: function () {
-            const aspectRatio = 16 / 9;
-            const height = 800;
-            const width = height * aspectRatio;
+      minimalTimelineGallery: function () {
+        const aspectRatio = 16 / 9;
+        const height = 800;
+        const width = height * aspectRatio;
 
-            return this.videos.map(function (video) {
-                return `              
+        return this.videos
+          .map(function (video) {
+            return `              
                         <li>
                             <div class="mobile-timeline__card">
                                 <span x-on:click="open = true">
@@ -292,48 +368,51 @@ function videoGallery() {
                                 </div>
                             </div>    
                         </li>`;
-            }).join('');
-        },
+          })
+          .join("");
+      },
 
-        galerieHTML: function () {
-            const aspectRatio = 16 / 9;
-            const height = 800;
-            const width = height * aspectRatio;
+      galerieHTML: function () {
+        const aspectRatio = 16 / 9;
+        const height = 800;
+        const width = height * aspectRatio;
 
-            return this.videos.map(function (video) {
-                return `
-                    <div class="mb-10">
-                            <div class="max-w-sm md:max-w-5xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
-                                <span x-on:click="open = true">
-                                    <video controls class="rounded-md cursor-pointer" width="${width}" height="${height}" poster="${video.poster}">
-                                        <source src="${video.src}" type="video/mp4">
-                                        <p>Ihr Browser unterstützt das Videoformat nicht.</p>
-                                    </video>
-                                </span>
-                                <div class="p-5">
-                                    <time class="text-sm text-gray-400 dark:text-white">${video.month} ${video.year}</time>
-                                    <a href="#">
-                                        <h5 class="mb-2 text-2xl font-bold custom-font uppercase tracking-tight text-gray-900 dark:text-[#9fe870]">${video.title}</h5>
-                                    </a>
-                                    <p class="mb-3 font-normal text-gray-700 dark:text-[#9fe870]">${video.desc}</p>
-                                </div>
-                            </div>    
-                    </div>`;
-            }).join('');
-        }
+        return this.videos
+          .map(function (video) {
+            return `
+            <div class="mb-10">
+                <div class="max-w-sm md:max-w-5xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
+                    <div class="video-container" onclick="loadVideo(this)">
+                        <img src="${video.poster}" alt="Video Thumbnail" class="rounded-md cursor-pointer" width="${width}" height="${height}">
+                        <video class="rounded-md" width="${width}" height="${height}" style="display:none;">
+                            <source src="${video.src}" type="video/mp4">
+                            <p>Ihr Browser unterstützt das Videoformat nicht.</p>
+                        </video>
+                    </div>
+                    <div class="p-5">
+                        <time class="text-sm text-gray-400 dark:text-white">${video.month} ${video.year}</time>
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-bold custom-font uppercase tracking-tight text-gray-900 dark:text-[#9fe870]">${video.title}</h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-[#9fe870]">${video.desc}</p>
+                    </div>
+                </div>
+            </div>`;
+          })
+          .join("");
+      },
     };
-}
-    
-    Alpine.data('videoGallery', videoGallery);
-    
-    // Checks which Viewport
-    window.addEventListener('resize', () => {
-        // Überwachen Sie die Bildschirmbreite und aktualisieren Sie den 'isMobile'-Zustand entsprechend
-        if (window.innerWidth <= 768) {
-            Alpine.store('isMobile', true);
-        } else {
-            Alpine.store('isMobile', false);
-        }
-    });
-    
-    </script>
+  }
+
+  Alpine.data("videoGallery", videoGallery);
+
+  // Checks which Viewport
+  window.addEventListener("resize", () => {
+    // Überwachen Sie die Bildschirmbreite und aktualisieren Sie den 'isMobile'-Zustand entsprechend
+    if (window.innerWidth <= 768) {
+      Alpine.store("isMobile", true);
+    } else {
+      Alpine.store("isMobile", false);
+    }
+  });
+</script>
