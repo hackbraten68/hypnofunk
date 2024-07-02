@@ -142,7 +142,7 @@
 
       <!-- TIMELINE & GALLERY DESKTOP -->
       <div x-show="!isMobile">
-        <section x-data="{ showTimeline: true }" class="timeline__container">
+        <section x-data="{ showTimeline: false }" class="timeline__container">
           <!-- TOGGLE BUTTON GROUP-->
           <div class="toggle-group__container" role="group">
             <button
@@ -198,7 +198,7 @@
           </div>
 
           <div x-show="!showTimeline">
-            <section id="gallery" class="mb-20 md:pt-20">
+            <section id="gallery" class="mb-20 md:mx-3">
               <div
                 id="gallery"
                 class="flex flex-col md:grid md:grid-cols-3 md:gap-4"
@@ -408,7 +408,7 @@
 
   // Checks which Viewport
   window.addEventListener("resize", () => {
-    // Überwachen Sie die Bildschirmbreite und aktualisieren Sie den 'isMobile'-Zustand entsprechend
+    // Monitors the screen width and updates the 'isMobile' status accordingly
     if (window.innerWidth <= 768) {
       Alpine.store("isMobile", true);
     } else {
