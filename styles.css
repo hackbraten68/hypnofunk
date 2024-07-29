@@ -9,38 +9,31 @@ html, body {
 }
 
 .header-background {
-  background-color: var(--bg-color);
+  background-color: var(--bg-light-color);
+  z-index: 1000;
 }
 
 .body-background {
-  background-color: var(--bg-light-color);
+  background: var(--bg-full-color);
 }
 
 :root {
-    /* Hauptfarben */
-    --primary-color: #44ab08; /* Green */
-    --secondary-color: #eefbfb; /* White */
-  
-    /* Hervorhebungsfarben */
-    --success-color: #9fe870; /* Grün */
-    --info-color: #17a2b8; /* Türkis */
-  
-    /* Textfarben */
-    --text-color: #163300; /* Dunkelgruen */
-  
-    /* Hintergrundfarben */
-    --bg-color: #44ab08; /* Green */
-    --bg-light-color: #eefbfb; /* Weiß */
-    --bg-dark-color: #163300; /* Dunkelgrau */
-  }
-  
+    --primary-color: #44ab08;
+    --secondary-color: #eefbfb;
+    --success-color: #9fe870;
+    --info-color: #17a2b8;
+    --text-color: #163300;
+    --bg-color: #44ab08;
+    --bg-light-color: #eefbfb;
+    --bg-dark-color: #163300;
+    --bg-full-color: radial-gradient(circle, rgba(159,232,112,1) 0%, rgba(68,171,8,1) 80%);
+}
 
 /* FONTS */
-
 @font-face {
     font-family: 'Fingerpop';
     src: url('./fonts/fingerpop.woff2') format('woff2'),
-        url('./fonts/fingerpop.woff') format('woff');
+         url('./fonts/fingerpop.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -50,12 +43,13 @@ html, body {
     font-family: 'Fingerpop';
 }
 
-/* LOGO */
-
 /* Mobile Navbar */
 .navbar__mobile {
   width: 100%;
-  background-color: var(--bg-color);
+  background-color: var(--bg-light-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
 .navbar__mobile-container {
@@ -65,6 +59,7 @@ html, body {
   justify-content: space-between;
   margin: 0 auto;
   padding: 1rem;
+  border-bottom: 1px solid var(--primary-color);
 }
 
 .navbar__mobile-title {
@@ -72,7 +67,7 @@ html, body {
   align-self: center;
   font-size: 1.5rem;
   white-space: nowrap;
-  color: var(--secondary-color);
+  color: var(--primary-color);
 }
 
 .navbar__mobile-hamburger {
@@ -84,20 +79,20 @@ html, body {
   height: 2.5rem;
   margin-left: 0.75rem;
   font-size: 0.875rem;
-  color: #a0aec0;
+  color: var(--primary-color);
   border-radius: 0.375rem;
   transition: background-color 0.3s ease;
-  :hover {
-    background-color: var(--bg-color);
-  }
-  :focus {
-    outline: none;
-    box-shadow: 0 0 0 2px white;
-  }
-  color: white;
-  dark:hover {
-    background-color: var(--bg-color);
-  }
+}
+.navbar__mobile-hamburger:hover {
+  background-color: var(--secondary-color);
+}
+.navbar__mobile-hamburger:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--secondary-color);
+}
+
+.navbar__mobile-hamburger:active {
+  background-color: var(--primary-color);
 }
 
 .navbar__mobile-list {
@@ -106,24 +101,27 @@ html, body {
   flex-direction: column;
   padding: 1rem; 
   margin-top: 1rem;
-  border: 1px solid var(--secondary-color);
+  border: 2px solid var(--primary-color);
   border-radius: 0.5rem;
-  background-color: var(--bg-color);
+  background-color: var(--secondary-color);
 }
 
 .navbar__mobile-list-item {
   display: block;
   padding: 0.5rem 1rem 0.5rem 0.75rem;
-  color: white;
+  color: var(--primary-color);
+  font-size: 1rem;
+  line-height: 1.5rem;
   background-color: transparent;
   transition: border 0.3s ease;
-  :hover {
-    border: 1px solid white;
-  }
+}
+.navbar__mobile-list-item:hover {
+  border: 1px solid white;
 }
 
+/* Desktop Navbar */
 .navbar__desktop {
-  background-color: var(--bg-color);
+  background-color: var(--bg-light-color);
   height: 4.25rem;
 }
 
@@ -152,7 +150,7 @@ html, body {
 .navbar__desktop-list-item {
   display: block;
   padding: 0.5rem 0.75rem;
-  color: white;
+  color: var(--text-color);
   background-color: transparent;
 }
 
@@ -161,49 +159,33 @@ html, body {
 }
 
 /* MAIN CONTENT */
-/* FEATURE TEASER */
-
 .feature-teaser__container {
   display: none;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
+  .feature-teaser__container {
     display: block;
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 1rem;
   }
-}
 
-.feature-teaser__info {
-  display: none;
-
-  @media (min-width: 768px) {
+  .feature-teaser__info {
     display: block;
+  }
+
+  .feature-teaser__info h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 8rem;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--primary-color);
+    margin: 0;
   }
 }
 
-.feature-teaser__info h3 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 8rem;
-  font-weight: 400;
-  font-style: normal;
-  color: var(--primary-color);
-  margin: 0;
-}
-
-.feature-teaser__logo {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.feature-teaser__logo img {
-  max-width: 100%;
-  height: auto;
-}
-
 /* TIMELINE DESKTOP */
-
 .timeline__container {
   align-content: flex-end;
 }
@@ -213,7 +195,7 @@ html, body {
   justify-content: center;
   gap: 1rem;
   border-radius: 0.375rem;
-  padding: 3rem ;
+  padding: 3rem;
 }
 
 .toggle-group__btn {
@@ -239,10 +221,9 @@ html, body {
 }
 
 /* MINIMAL TIMELINE MOBILE */
-
 .mobile-timeline__container {
-  background-color: var(--bg-light-color);
-  margin: 0 1rem ;
+  background-color: var(--bg-full-color);
+  margin: 0 1rem;
 }
 
 .mobile-timeline__container ol {
@@ -257,7 +238,8 @@ html, body {
 .mobile-timeline__card {
   max-width: 24rem;
   margin-top: 2rem;
-  background-color: var(--bg-color);
+  background-color: var(--bg-light-color);
+  border: 1px var(--primary-color) solid;
   border-radius: 0.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
 }
@@ -269,7 +251,7 @@ html, body {
 .mobile-timeline__text time,
 .mobile-timeline__text h5,
 .mobile-timeline__text p {
-  color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 .mobile-timeline__text time {
@@ -283,10 +265,12 @@ html, body {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: -0.025em;
+  text-transform: uppercase;
+  hyphens: auto;
+  word-wrap: break-word;
 }
 
 /* FOOTER */
-
 footer {
   background-color: var(--bg-color);
 }
@@ -299,9 +283,10 @@ footer {
   padding: 1rem;
   display: flex;
   flex-direction: column;
+}
 
-  @media (min-width: 768px) {
-    display: flex;
+@media (min-width: 768px) {
+  .footer__container {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -321,9 +306,10 @@ footer ul {
   display: flex;
   align-items: center;
   justify-content: center;
+}
 
-  @media (min-width: 768px) {
-    display: flex;
+@media (min-width: 768px) {
+  footer ul {
     flex-wrap: wrap;
     align-items: center;
     font-weight: bold;
