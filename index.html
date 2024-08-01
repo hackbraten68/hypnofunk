@@ -119,14 +119,14 @@
     <!-- MAIN CONTENT -->
     <div
       x-data="videoGallery()"
-      x-init="sortiereNachYear"
+      x-init="sortVideos"
       class="body-background"
     >
       <!-- FEATURE TEASER -->
       <section class="feature-teaser__container">
         <div class="feature-teaser__info">
-          <h3>See through your inner Eye</h3>
-          <div>
+          <h3>Hypnofunk</h3>
+          <div class="feature-teaser__subheading">
             <p>
               Solange der Hypnosefunk sendet und keiner die Techniken der
               Manipulation und Propaganda kennt, wird jeder denken, dass die
@@ -136,22 +136,16 @@
         </div>
       </section>
 
-      
-
       <!-- TIMELINE & GALLERY DESKTOP -->
       <div x-show="!isMobile">
-        <section x-data="{ showTimeline: false }" class="timeline__container">
-
-          
-            <section id="gallery" class="mb-20 md:mx-3">
-              <div
-                id="gallery"
-                class="flex flex-col md:grid md:grid-cols-3 md:gap-4"
-                x-html="galerieHTML"
-              ></div>
-            </section>
-          
-        </section>
+          <section id="gallery" class="mb-20 md:mx-3">
+            <div
+              id="gallery"
+              class="flex flex-col md:grid md:grid-cols-3 md:gap-4"
+              x-html="galerieHTML"
+            >
+            </div>
+          </section>
       </div>
 
       <!-- MINIMAL TIMELINE MOBILE -->
@@ -192,6 +186,18 @@
   document.addEventListener("DOMContentLoaded", function () {
     const yearSpan = document.getElementById("currentYear");
     yearSpan.textContent = getCurrentYear();
+  });
+
+  document.addEventListener('scroll', function() {
+    const navbarMobile = document.querySelector('.navbar__mobile-container');
+    const navbarDesktop = document.querySelector('.navbar__desktop');
+    if (window.scrollY > 0) {
+      navbarMobile.classList.add('scrolled');
+      navbarDesktop.classList.add('scrolled');
+    } else {
+      navbarMobile.classList.remove('scrolled');
+      navbarDesktop.classList.remove('scrolled');
+    }
   });
 
   function loadVideo(container) {
@@ -262,58 +268,23 @@
         },
       ],
 
-      // Mapping von deutschen Monatsnamen zu numerischen Werten
       monatZuNummer: { Januar: 0, Februar: 1, März: 2, April: 3, Mai: 4, Juni: 5, Juli: 6, August: 7, September: 8, Oktober: 9, November: 10, Dezember: 11 },
 
-      sortiereNachYear: function () {
+      sortVideos: function () {
         this.videos.sort((a, b) => {
-          // Wandelt Monatsnamen in numerische Werte um
           const monthA = this.monatZuNummer[a.month];
           const monthB = this.monatZuNummer[b.month];
 
-          // Konvertiere year und day von String zu Zahl
           const yearA = parseInt(a.year, 10);
           const yearB = parseInt(b.year, 10);
           const dayA = parseInt(a.day || 1, 10);
           const dayB = parseInt(b.day || 1, 10);
 
-          // Erzeuge Zeitstempel für jedes Video
           const timestampA = new Date(yearA, monthA, dayA).getTime();
           const timestampB = new Date(yearB, monthB, dayB).getTime();
 
-          // Sortiere die Videos nach dem Zeitstempel absteigend
           return timestampB - timestampA;
         });
-      },
-
-      timelineGallery: function () {
-        const aspectRatio = 16 / 9;
-        const height = 800;
-        const width = height * aspectRatio;
-
-        return this.videos
-          .map(function (video) {
-            return `              
-                        <li class="mb-10">
-                            <div class="absolute hidden md:block w-3 h-3 bg-[#163300] rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900 dark:bg-[#163300]"></div>
-                            <time class="ms-4 mb-1 text-sm font-normal leading-none text-gray-400 dark:text-[#163300]">${video.day}.${video.month} ${video.year}</time>
-                            <div class="max-w-sm md:max-w-5xl md:mx-auto mt-8 bg-white md:border md:border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
-                                <span x-on:click="open = true">
-                                    <video controls class="rounded-md cursor-pointer" width="${width}" height="${height}" poster="${video.poster}">
-                                        <source src="${video.src}" type="video/mp4">
-                                        <p>Ihr Browser unterstützt das Videoformat nicht.</p>
-                                    </video>
-                                </span>
-                                <div class="p-5">
-                                    <a href="#">
-                                        <h5 class="mb-2 text-2xl font-bold custom-font uppercase tracking-tight text-gray-900 dark:text-[#9fe870]">${video.title}</h5>
-                                    </a>
-                                    <p class="mb-3 font-normal text-gray-700 dark:text-[#9fe870]">${video.desc}</p>
-                                </div>
-                            </div>    
-                        </li>`;
-          })
-          .join("");
       },
 
       minimalTimelineGallery: function () {
@@ -353,25 +324,25 @@
         return this.videos
           .map(function (video) {
             return `
-            <div class="mb-10">
-                <div class="max-w-sm md:max-w-5xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
-                    <div class="video-container" onclick="loadVideo(this)">
-                        <img src="${video.poster}" alt="Video Thumbnail" class="rounded-md cursor-pointer" width="${width}" height="${height}">
-                        <video controls class="rounded-md" width="${width}" height="${height}" style="display:none;">
-                            <source src="${video.src}" type="video/mp4">
-                            <p>Ihr Browser unterstützt das Videoformat nicht.</p>
-                        </video>
-                    </div>
-                    <div class="p-5">
-                        <time class="text-sm text-gray-400 dark:text-white">${video.day}. ${video.month} ${video.year}</time>
-                        <a href="#">
-                            <h5 class="mb-2 text-2xl font-bold custom-font uppercase tracking-tight text-gray-900 dark:text-[#9fe870]">${video.title}</h5>
-                        </a>
-                        <p class="mb-3 font-normal text-gray-700 dark:text-[#9fe870]">${video.desc}</p>
-                    </div>
-                </div>
-            </div>`;
-          })
+                      <div class="">
+                          <div class="max-w-sm md:max-w-5xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
+                              <div class="video-container" onclick="loadVideo(this)">
+                                  <img src="${video.poster}" alt="Video Thumbnail" class="rounded-md cursor-pointer" width="${width}" height="${height}">
+                                  <video controls class="rounded-md" width="${width}" height="${height}" style="display:none;">
+                                      <source src="${video.src}" type="video/mp4">
+                                      <p>Ihr Browser unterstützt das Videoformat nicht.</p>
+                                  </video>
+                              </div>
+                              <div class="p-5">
+                                  <time class="text-sm text-gray-400 dark:text-white">${video.day}. ${video.month} ${video.year}</time>
+                                  <a href="#">
+                                      <h5 class="mb-2 text-2xl font-bold custom-font uppercase tracking-tight text-gray-900 dark:text-[#9fe870]">${video.title}</h5>
+                                  </a>
+                                  <p class="mb-3 font-normal text-gray-700 dark:text-[#9fe870]">${video.desc}</p>
+                              </div>
+                          </div>
+                      </div>`;
+            })
           .join("");
       },
     };
