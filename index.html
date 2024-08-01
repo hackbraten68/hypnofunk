@@ -373,7 +373,7 @@
                 <div class="max-w-sm md:max-w-5xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
                     <div class="video-container" onclick="loadVideo(this)">
                         <img src="${video.poster}" alt="Video Thumbnail" class="rounded-md cursor-pointer" width="${width}" height="${height}">
-                        <video class="rounded-md" width="${width}" height="${height}" style="display:none;">
+                        <video controls class="rounded-md" width="${width}" height="${height}" style="display:none;">
                             <source src="${video.src}" type="video/mp4">
                             <p>Ihr Browser unterstützt das Videoformat nicht.</p>
                         </video>
@@ -405,4 +405,3 @@
     }
   });
 </script>
-
