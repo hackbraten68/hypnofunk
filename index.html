@@ -263,20 +263,7 @@
       ],
 
       // Mapping von deutschen Monatsnamen zu numerischen Werten
-      monatZuNummer: {
-        Januar: 0,
-        Februar: 1,
-        März: 2,
-        April: 3,
-        Mai: 4,
-        Juni: 5,
-        Juli: 6,
-        August: 7,
-        September: 8,
-        Oktober: 9,
-        November: 10,
-        Dezember: 11
-      },
+      monatZuNummer: { Januar: 0, Februar: 1, März: 2, April: 3, Mai: 4, Juni: 5, Juli: 6, August: 7, September: 8, Oktober: 9, November: 10, Dezember: 11 },
 
       sortiereNachYear: function () {
         this.videos.sort((a, b) => {
@@ -294,12 +281,9 @@
           const timestampA = new Date(yearA, monthA, dayA).getTime();
           const timestampB = new Date(yearB, monthB, dayB).getTime();
 
-          console.log(`Timestamp A: ${timestampA}, Timestamp B: ${timestampB}`);
-
           // Sortiere die Videos nach dem Zeitstempel absteigend
           return timestampB - timestampA;
         });
-        console.log(this.videos); // Debug-Ausgabe der sortierten Liste
       },
 
       timelineGallery: function () {
