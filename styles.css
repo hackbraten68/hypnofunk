@@ -146,7 +146,7 @@
 
 .navbar__desktop-title {
   font-family: 'Fingerpop';
-  color: white;
+  color: var(--primary-color);
 }
 
 .navbar__desktop-list {
@@ -167,6 +167,10 @@
   text-decoration: underline;
 }
 
+.navbar__desktop-social-wrapper {
+  display: flex;
+}
+
 /* MAIN CONTENT */
 .feature-teaser__container {
   /* display: block; */
@@ -183,6 +187,7 @@
   font-style: normal;
   color: var(--secondary-color);
   margin: 0;
+  display: none;
 }
 
 .feature-teaser__subheading p {
@@ -199,8 +204,8 @@
   .feature-teaser__container {
     display: block;
     max-width: 1280px;
-    margin: 0 auto 5rem;
-    padding: 4rem 0 0;
+    margin: 0 0 5rem;
+    padding: 4rem 1rem 0;
   }
 
   .feature-teaser__info {
