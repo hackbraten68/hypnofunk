@@ -133,7 +133,7 @@
     <div
       x-data="videoGallery()"
       x-init="sortVideos"
-      class="body-background"
+      class="body-background body-width"
     >
       <!-- FEATURE TEASER -->
       <section class="feature-teaser__container">
@@ -337,21 +337,19 @@
         return this.videos
           .map(function (video) {
             return `
-                      <div class="">
-                          <div class="max-w-sm md:max-w-5xl mx-auto mt-8 bg-white border border-gray-200 rounded-lg shadow dark:bg-[#163300] dark:border-gray-700">
-                              <div class="video-container" onclick="loadVideo(this)">
+                      <div class="desktop-gallery__card">
+                          <div class="desktop-gallery__container">
+                              <div class="desktop-gallery__video-container" onclick="loadVideo(this)">
                                   <img src="${video.poster}" alt="Video Thumbnail" class="rounded-md cursor-pointer" width="${width}" height="${height}">
                                   <video controls class="rounded-md" width="${width}" height="${height}" style="display:none;">
                                       <source src="${video.src}" type="video/mp4">
                                       <p>Ihr Browser unterstützt das Videoformat nicht.</p>
                                   </video>
                               </div>
-                              <div class="p-5">
-                                  <time class="text-sm text-gray-400 dark:text-white">${video.day}. ${video.month} ${video.year}</time>
-                                  <a href="#">
-                                      <h5 class="mb-2 text-2xl font-bold custom-font uppercase tracking-tight text-gray-900 dark:text-[#9fe870]">${video.title}</h5>
-                                  </a>
-                                  <p class="mb-3 font-normal text-gray-700 dark:text-[#9fe870]">${video.desc}</p>
+                              <div class="desktop-gallery__body">
+                                  <time class="desktop-gallery__body-time">${video.day}. ${video.month} ${video.year}</time>
+                                      <p class="desktop-gallery__body-headline">${video.title}</p>
+                                  <p class="desktop-gallery__body-text">${video.desc}</p>
                               </div>
                           </div>
                       </div>`;
