@@ -152,24 +152,23 @@
 
   // COOKIE MESSAGE
   document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.querySelector('.cookies');
+    const banner = document.querySelector('.cookies');
 
-  function showBanner() {
-    banner.style.display = 'block';
-    setTimeout(() => {
-      banner.style.opacity = '1';
-    }, 10); // Kurze Verzögerung, um sicherzustellen, dass die Anzeige wirkt
-
-    setTimeout(() => {
-      banner.style.opacity = '0';
+    function showBanner() {
+      banner.style.display = 'block';
       setTimeout(() => {
-        banner.style.display = 'none';
-      }, 500);
-    }, 10000); 
-  }
-
-  showBanner();
-});
+        banner.style.opacity = '1';
+      }, 100);
+      
+      setTimeout(() => {
+        banner.style.opacity = '0';
+        setTimeout(() => {
+          banner.style.display = 'none';
+        }, 500);
+      }, 10000); 
+    }
+    setTimeout(showBanner, 100);
+  });
 
 
   document.addEventListener("DOMContentLoaded", function () {
