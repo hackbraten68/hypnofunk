@@ -159,16 +159,18 @@
       banner.style.display = 'block';
       setTimeout(() => {
         banner.style.opacity = '1';
-      }, 100);
+      }, 750);
       
       setTimeout(() => {
         banner.style.opacity = '0';
+        console.log("Cookie set to opacity: 0")
         setTimeout(() => {
           banner.style.display = 'none';
+          console.log("Cookie set to display: none")
         }, 500);
       }, 10000); 
     }
-    setTimeout(showBanner, 100);
+    setTimeout(showBanner, 750);
   });
 
 
