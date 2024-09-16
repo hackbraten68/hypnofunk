@@ -152,26 +152,46 @@
 
   // COOKIE MESSAGE
   document.addEventListener('DOMContentLoaded', () => {
-    const banner = document.querySelector('.cookies');
+  const banner = document.querySelector('.cookies');
 
-    function showBanner() {
-      console.log("Cookie Banner init")
-      banner.style.display = 'block';
+  // Log the initial display state and opacity value
+  console.log("Initial display state:", window.getComputedStyle(banner).display);
+  console.log("Initial opacity value:", window.getComputedStyle(banner).opacity);
+
+  function showBanner() {
+    banner.style.display = 'block';
+    console.log("Cookie Banner set to display: block");
+    console.log("Current display state:", window.getComputedStyle(banner).display);
+
+    setTimeout(() => {
+      banner.style.opacity = '1';
+      console.log("Cookie set to opacity: 1");
+      console.log("Current opacity state:", window.getComputedStyle(banner).opacity);
+    }, 750);
+
+    setTimeout(() => {
+      banner.style.opacity = '0';
+      console.log("Cookie set to opacity: 0");
+      console.log("Current opacity state:", window.getComputedStyle(banner).opacity);
+
       setTimeout(() => {
-        banner.style.opacity = '1';
-      }, 750);
-      
-      setTimeout(() => {
-        banner.style.opacity = '0';
-        console.log("Cookie set to opacity: 0")
-        setTimeout(() => {
-          banner.style.display = 'none';
-          console.log("Cookie set to display: none")
-        }, 500);
-      }, 10000); 
-    }
-    setTimeout(showBanner, 750);
-  });
+        banner.style.display = 'none';
+        console.log("Cookie set to display: none");
+        console.log("Current display state:", window.getComputedStyle(banner).display);
+
+        // Log the final display state and opacity value
+        console.log("Final display state:", window.getComputedStyle(banner).display);
+        console.log("Final opacity value:", window.getComputedStyle(banner).opacity);
+      }, 500);
+    }, 5000);
+  }
+
+  // Show the banner after a delay
+  setTimeout(showBanner, 750);
+});
+
+
+
 
 
   document.addEventListener("DOMContentLoaded", function () {
