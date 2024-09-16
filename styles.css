@@ -46,7 +46,6 @@ body {
 }
 
 /* COOKIE MESSAGE */
-
 .cookies {
   position: fixed;
   bottom: 0;
@@ -60,9 +59,8 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: opacity 0.5s ease-out;
-  display: none;
+  opacity: 0; /* Starten Sie mit Opacity 0 */
 }
-
 
 @media (min-width: 768px) {
   .cookies {
@@ -75,7 +73,6 @@ body {
   max-width: 1280px;
   margin: 0 auto;
 }
-
 
 /* Mobile Navbar */
 .navbar__mobile {
