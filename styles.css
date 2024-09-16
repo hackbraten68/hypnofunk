@@ -142,6 +142,7 @@ body {
 
 .navbar__desktop-container {
   max-width: 1280px;
+  height: inherit;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
