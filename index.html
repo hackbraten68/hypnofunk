@@ -154,38 +154,26 @@
   document.addEventListener('DOMContentLoaded', () => {
   const banner = document.querySelector('.cookies');
 
-  console.log("Initial display state:", window.getComputedStyle(banner).display);
-
   function showBanner() {
-    console.log("Setting display to block...");
-    banner.style.display = 'block';
-    console.log("Cookie Banner set to display: block");
-    setTimeout(() => {
-      console.log("Current display state after setting to block:", window.getComputedStyle(banner).display);
-      banner.style.opacity = '1';
-      console.log("Cookie set to opacity: 1");
-      console.log("Current opacity state:", window.getComputedStyle(banner).opacity);
-    }, 750);
+    banner.classList.add('show');
+    console.log("Cookie Banner set to show");
 
     setTimeout(() => {
-      banner.style.opacity = '0';
-      console.log("Cookie set to opacity: 0");
-      console.log("Current opacity state:", window.getComputedStyle(banner).opacity);
+      banner.classList.remove('show');
+      banner.classList.add('hide');
+      console.log("Cookie Banner set to hide");
+    }, 10000); // Zeigt das Banner für 10 Sekunden
 
-      setTimeout(() => {
-        banner.style.display = 'none';
-        console.log("Cookie set to display: none");
-        console.log("Current display state after setting to none:", window.getComputedStyle(banner).display);
-      }, 500);
-    }, 5000);
+    setTimeout(() => {
+      banner.classList.remove('hide');
+      banner.classList.add('hidden');
+      console.log("Cookie Banner set to hidden");
+    }, 10500); // Setzt die Sichtbarkeit nach der Animation auf 'hidden'
   }
 
+  // Show the banner after a delay
   setTimeout(showBanner, 750);
 });
-
-
-
-
 
 
   document.addEventListener("DOMContentLoaded", function () {
