@@ -99,12 +99,7 @@
             <div class="hidden w-full md:block md:w-auto" id="navbar-default">
               <ul class="navbar__desktop-list">
                 <li>
-                  <a
-                    href="#"
-                    class="navbar__desktop-list-item"
-                    aria-current="page"
-                    >Home</a
-                  >
+                  <a href="#" class="navbar__desktop-list-item" aria-current="page">Home</a>
                 </li>
                 <li>
                   <a href="#" class="navbar__desktop-list-item">Kontakt</a>
@@ -168,24 +163,27 @@
         </section>
       </div>
 
-      <footer>
-        <div class="footer__container">
-          <span
-            >© <span id="currentYear"></span>
-            <a href="https://hypnofunk.de/" class="hover:underline">Hypnofunk</a
-            >. All Rights Reserved.
-          </span>
-          <span>Coded with ❤️</span>
-          <ul>
-            <li>
-              <a href="#" class="hover:underline me-4 md:me-6">Impressum</a>
-            </li>
-            <li>
-              <a href="#" class="hover:underline">Kontakt</a>
-            </li>
-          </ul>
-        </div>
-      </footer>
+      <div 
+        x-data="imprintModal()"
+        x-init="initModal()"
+        >
+        <footer>
+          <div class="footer__container">
+            <span
+              >© <span id="currentYear"></span>
+              <a href="https://hypnofunk.de/" class="hover:underline">Hypnofunk</a
+              >. All Rights Reserved.
+            </span>
+            <span>Coded with 🤍</span>
+            <ul>
+              <li>
+                <a href="#" x-on:click.prevent="open = true" class="hover:underline me-4 md:me-6 font-normal">Impressum</a>
+              </li>
+            </ul>
+          </div>
+        </footer>
+        <div id="modalContainer"></div>
+      </div>
     </div>
   </body>
 </html>
@@ -359,7 +357,85 @@
     };
   }
 
-  Alpine.data("videoGallery", videoGallery);
+  function imprintModal() {
+    return {
+      open: false,
+      imprint: [
+        {
+          firstName: 'Max',
+          lastName: 'Mustermann',
+          street: 'Bretanoweg 3',
+          zip: '69126',
+          city: 'Heidelberg',
+          tel: '06221/123456789',
+          contact: 'kontakt@hypnofunk.de',
+          url: 'www.hypnofunk.de',
+          text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
+        }
+      ],
+
+      imprintHTML: function () {
+        return this.imprint
+          .map(function (entry) {
+            return `
+              <div x-show="open" 
+                style="display: none"
+                x-on:keydown.escape.prevent.stop="open = false"
+                role="dialog" 
+                aria-modal="true" 
+                x-id="['modal-title']" 
+                :aria-labelledby="$id('modal-title')"
+                class="fixed inset-0 imprint-modal__container overflow-y-auto">
+              <!-- Overlay -->
+              <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+              
+              <!-- Panel -->
+              <div x-show="open" x-transition
+                  x-on:click="open = false"
+                  class="relative flex min-h-screen items-center justify-center p-4">
+                <div x-on:click.stop
+                    x-trap.noscroll.inert="open"
+                    class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
+                  <!-- Title -->
+                  <h2 class="text-2xl font-bold" :id="$id('modal-title')">Impressum | hypnofunk.de</h2>
+                  
+                  <!-- Content -->
+                  <div>
+                    <p class="mt-2 text-gray-600"><span class="font-bold">Name: </span>${entry.firstName} ${entry.lastName}</p>
+                    <p class="mt-2 text-gray-600"><span class="font-bold">Adresse: </span>${entry.street}, ${entry.zip} ${entry.city}</p>
+                    <p class="mt-2 text-gray-600"><span class="font-bold">Telefon: </span>${entry.tel}</p>
+                  <p class="mt-2 text-gray-600"><span class="font-bold">E-Mail: </span><a href="mailto:${entry.contact}" class="text-blue-600 hover:underline">${entry.contact}</a></p>
+                  <p class="mt-2 text-gray-600"><span class="font-bold">Website: </span><a href="http://${entry.url}" target="_blank" class="text-blue-600 hover:underline">${entry.url}</a></p>
+                    <p class="mt-2 text-gray-600">${entry.text}</p>
+                  </div>
+                  
+                  <!-- Buttons -->
+                  <div class="mt-4 md:mt-8">
+                    <button type="button" x-on:click="open = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">
+                      Schließen
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+          })
+        .join("");
+    },
+
+      // Funktion zur Initialisierung und Einfügen ins DOM
+      initModal: function() {
+        const modalContainer = document.getElementById('modalContainer');
+        modalContainer.innerHTML = this.imprintHTML();
+      }
+    }
+  }
+
+
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('imprintModal', imprintModal);
+    Alpine.data('videoGallery', videoGallery);
+  });
+
 
   // Checks which Viewport
   window.addEventListener("resize", () => {

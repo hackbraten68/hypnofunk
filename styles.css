@@ -240,6 +240,7 @@ body {
   .feature-teaser__subheading p {
     border: none;
     padding: 0;
+    font-size: 1.75rem;
   }
 }
 
@@ -392,4 +393,8 @@ footer ul {
     align-items: center;
     font-weight: bold;
   }
+}
+
+.imprint-modal__container {
+  z-index: 2000;
 }
