@@ -35,13 +35,6 @@
 
   <body x-data="{ isMobile: window.innerWidth <= 768 }">
     <div x-cloak class="header-background navbar__mobile">
-      <!-- COOKIE MESSAGE -->
-      <div class="cookies" id="cookies-banner">
-        <div id="cookies-text">
-          🍪 Cookie Hinweis: Hypnofunk.de sammelt keine Cookies 🍪
-        </div>
-      </div>
-      
             
       <!-- MOBILE NAVBAR -->
       <div x-show="isMobile" class="">
@@ -139,6 +132,13 @@
           </div>
         </footer>
         <div id="modalContainer"></div>
+      </div>
+    </div>
+    
+    <!-- COOKIE MESSAGE -->
+    <div class="cookies" id="cookies-banner">
+      <div id="cookies-text">
+        🍪 Cookie Hinweis: Hypnofunk.de sammelt keine Cookies 🍪
       </div>
     </div>
   </body>
