@@ -45,6 +45,37 @@ body {
     font-family: 'Fingerpop';
 }
 
+/* COOKIE MESSAGE */
+
+.cookies {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ff6f61;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: opacity 0.5s ease-out;
+  display: none;
+}
+
+@media (min-width: 769px) {
+  .cookies {
+    font-size: 1rem;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+}
+
+#cookies-text {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+
 /* Mobile Navbar */
 .navbar__mobile {
   width: 100%;

@@ -35,9 +35,17 @@
 
   <body x-data="{ isMobile: window.innerWidth <= 768 }">
     <div x-cloak class="header-background navbar__mobile">
+      <!-- COOKIE MESSAGE -->
+      <div class="cookies" id="cookies-banner">
+        <div id="cookies-text">
+          🍪 Cookie Hinweis: Hypnofunk.de sammelt keine Cookies 🍪
+        </div>
+      </div>
+      
+            
       <!-- MOBILE NAVBAR -->
       <div x-show="isMobile" class="">
-        <nav x-data="{ isActive: false }" class="">
+        <nav x-data="{ isActive: false }">
           <div class="navbar__mobile-container">
             <a href="#" class="flex items-center">
               <span class="navbar__mobile-title">Hypnofunk.de</span>
@@ -141,6 +149,21 @@
     const date = new Date();
     return date.getFullYear();
   }
+
+  // COOKIE MESSAGE
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookies-banner');
+
+  // Banner einblenden
+    banner.style.display = 'block';
+
+    setTimeout(() => {
+      banner.style.opacity = '0';
+      setTimeout(() => {
+        banner.style.display = 'none';
+      }, 500);
+    }, 10000);
+  });
 
   document.addEventListener("DOMContentLoaded", function () {
     const yearSpan = document.getElementById("currentYear");
