@@ -152,18 +152,25 @@
 
   // COOKIE MESSAGE
   document.addEventListener('DOMContentLoaded', () => {
-    const banner = document.getElementById('cookies-banner');
+  const banner = document.querySelector('.cookies');
 
-  // Banner einblenden
+  function showBanner() {
     banner.style.display = 'block';
+    setTimeout(() => {
+      banner.style.opacity = '1';
+    }, 10); // Kurze Verzögerung, um sicherzustellen, dass die Anzeige wirkt
 
     setTimeout(() => {
       banner.style.opacity = '0';
       setTimeout(() => {
         banner.style.display = 'none';
       }, 500);
-    }, 10000);
-  });
+    }, 10000); 
+  }
+
+  showBanner();
+});
+
 
   document.addEventListener("DOMContentLoaded", function () {
     const yearSpan = document.getElementById("currentYear");
