@@ -128,7 +128,7 @@
       </div>
     
     <!-- COOKIE MESSAGE -->
-    <div x-data="cookieBanner()" class="cookies" id="cookies-banner" x-show="visible" x-transition.opacity>
+    <div x-data="cookieBanner()" class="cookies" id="cookies-banner" x-show="visible" x-init="initBanner()" x-transition.opacity>
       <div id="cookies-text">
         🍪 Cookie Hinweis: Hypnofunk.de sammelt keine Cookies 🍪
       </div>
@@ -147,7 +147,7 @@
     return {
       visible: false,
 
-      init() {
+      initBanner() {
         console.log("Banner init() called");
 
         // Banner nach 750 ms anzeigen
@@ -175,11 +175,6 @@
       }
     }
   }
-
-document.addEventListener('alpine:init', () => {
-  Alpine.data('cookieBanner', cookieBanner);
-});
-
 
   document.addEventListener("DOMContentLoaded", function () {
     const yearSpan = document.getElementById("currentYear");
