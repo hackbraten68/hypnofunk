@@ -349,18 +349,18 @@
                     
                     <!-- Panel -->
                     <div x-show="openImpressum" x-transition x-on:click="openImpressum = false" class="relative flex min-h-screen items-center justify-center p-4">
-                        <div x-on:click.stop class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
-                            <h2 class="text-2xl font-bold">Impressum | hypnofunk.de</h2>
+                        <div x-on:click.stop class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white dark:bg-[var(--bg-secondary-dark)] p-12 shadow-lg">
+                            <h2 class="text-2xl font-bold dark:text-[var(--tertiary-color-dark)]">Impressum | hypnofunk.de</h2>
                             <div>
-                                <p class="mt-2 text-gray-600"><span class="font-bold">Name: </span>${this.modals.impressum.firstName} ${this.modals.impressum.lastName}</p>
-                                <p class="mt-2 text-gray-600"><span class="font-bold">Adresse: </span>${this.modals.impressum.street}, ${this.modals.impressum.zip} ${this.modals.impressum.city}</p>
-                                <p class="mt-2 text-gray-600"><span class="font-bold">Telefon: </span>${this.modals.impressum.tel}</p>
-                                <p class="mt-2 text-gray-600"><span class="font-bold">E-Mail: </span><a href="mailto:${this.modals.impressum.contact}" class="text-blue-600 hover:underline">${this.modals.impressum.contact}</a></p>
-                                <p class="mt-2 text-gray-600"><span class="font-bold">Website: </span><a href="http://${this.modals.impressum.url}" target="_blank" class="text-blue-600 hover:underline">${this.modals.impressum.url}</a></p>
-                                <p class="mt-2 text-gray-600">${this.modals.impressum.text}</p>
+                                <p class="mt-2 text-gray-600 dark:text-white"><span class="font-bold">Name: </span>${this.modals.impressum.firstName} ${this.modals.impressum.lastName}</p>
+                                <p class="mt-2 text-gray-600 dark:text-white"><span class="font-bold">Adresse: </span>${this.modals.impressum.street}, ${this.modals.impressum.zip} ${this.modals.impressum.city}</p>
+                                <p class="mt-2 text-gray-600 dark:text-white"><span class="font-bold">Telefon: </span>${this.modals.impressum.tel}</p>
+                                <p class="mt-2 text-gray-600 dark:text-white"><span class="font-bold">E-Mail: </span><a href="mailto:${this.modals.impressum.contact}" class="text-blue-600 dark:text-[var(--tertiary-color-dark)] hover:underline">${this.modals.impressum.contact}</a></p>
+                                <p class="mt-2 text-gray-600 dark:text-white"><span class="font-bold">Website: </span><a href="http://${this.modals.impressum.url}" target="_blank" class="text-blue-600 dark:text-[var(--tertiary-color-dark)] hover:underline">${this.modals.impressum.url}</a></p>
+                                <p class="mt-2 text-gray-600 dark:text-white">${this.modals.impressum.text}</p>
                             </div>
                             <div class="mt-4 md:mt-8">
-                                <button type="button" x-on:click="openImpressum = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">Schließen</button>
+                                <button type="button" x-on:click="openImpressum = false" class="rounded-md border border-gray-200 dark:border-0 bg-white dark:bg-[var(--tertiary-color-dark)] px-5 py-2.5">Schließen</button>
                             </div>
                         </div>
                     </div>
@@ -372,13 +372,13 @@
 
                     <!-- Panel -->
                     <div x-show="openDatenschutz" x-transition x-on:click="openDatenschutz = false" class="relative flex min-h-screen items-center justify-center p-4">
-                        <div x-on:click.stop class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
-                            <h2 class="text-2xl font-bold">${this.modals.datenschutz.title}</h2>
+                        <div x-on:click.stop class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white dark:bg-[var(--bg-secondary-dark)] p-12 shadow-lg">
+                            <h2 class="text-2xl font-bold dark:text-[var(--tertiary-color-dark)]">${this.modals.datenschutz.title}</h2>
                             <div>
-                                <p class="mt-2 text-gray-600">${this.modals.datenschutz.content}</p>
+                                <p class="mt-2 text-gray-600 dark:text-white">${this.modals.datenschutz.content}</p>
                             </div>
                             <div class="mt-4 md:mt-8">
-                                <button type="button" x-on:click="openDatenschutz = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">Schließen</button>
+                                <button type="button" x-on:click="openDatenschutz = false" class="rounded-md border border-gray-200 dark:border-0 bg-white dark:bg-[var(--tertiary-color-dark)] px-5 py-2.5">Schließen</button>
                             </div>
                         </div>
                     </div>
