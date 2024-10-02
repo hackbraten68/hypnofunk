@@ -128,11 +128,16 @@
       </div>
     
     <!-- COOKIE MESSAGE -->
-    <div x-data="cookieBanner()" class="cookies" id="cookies-banner" x-show="visible" x-init="initBanner()" x-transition.opacity>
-      <div id="cookies-text">
-        🍪 Cookie Hinweis: Hypnofunk.de sammelt keine Cookies 🍪
+    <div x-data="{ visible: true }" x-show="visible" x-transition.opacity>
+      <div class="cookies">
+          <span>
+            🍪 Hypnofunk.de sammelt keine Cookies 🍪
+          </span>
+          <button @click="visible = false" class="cookies__button rounded">
+              Schließen
+          </button>
       </div>
-    </div>
+  </div>
   </body>
 </html>
 
@@ -140,40 +145,6 @@
   function getCurrentYear() {
     const date = new Date();
     return date.getFullYear();
-  }
-
-  // COOKIE MESSAGE
-  function cookieBanner() {
-    return {
-      visible: false,
-
-      initBanner() {
-        console.log("Banner init() called");
-
-        // Banner nach 750 ms anzeigen
-        setTimeout(() => {
-          console.log("750ms timeout completed, calling showBanner()");
-          this.showBanner();
-        }, 750);
-      },
-
-      async showBanner() {
-        console.log("showBanner() called, making banner visible");
-        this.visible = true; // Banner anzeigen
-
-        console.log("Banner should now be visible, waiting 5 seconds before hiding...");
-
-        await new Promise(resolve => setTimeout(resolve, 5000)); // 5 Sekunden anzeigen
-
-        console.log("5 seconds passed, calling hideBanner()");
-        this.hideBanner();
-      },
-
-      hideBanner() {
-        console.log("hideBanner() called, hiding banner");
-        this.visible = false; // Banner ausblenden
-      }
-    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {

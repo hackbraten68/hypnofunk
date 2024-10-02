@@ -48,6 +48,10 @@ body {
 /* COOKIE MESSAGE */
 /* CSS für das Banner */
 .cookies {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -59,20 +63,20 @@ body {
   text-align: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  opacity: 0;
-  transition: opacity 0.5s ease-out;
 }
 
 @media (min-width: 768px) {
   .cookies {
     font-size: 1rem;
+    gap: 8rem;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   }
 }
 
-#cookies-text {
-  max-width: 1280px;
-  margin: 0 auto;
+.cookies__button {
+  background-color: var(--info-color);
+  color: #fff;
+  padding: 0.25rem 1rem;
 }
 
 /* Mobile Navbar */
