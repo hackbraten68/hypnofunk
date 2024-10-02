@@ -383,7 +383,7 @@ document.addEventListener('alpine:init', () => {
                     
                     <!-- Panel -->
                     <div x-show="openImpressum" x-transition x-on:click="openImpressum = false" class="relative flex min-h-screen items-center justify-center p-4">
-                        <div x-on:click.stop x-trap.noscroll.inert="openImpressum" class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
+                        <div x-on:click.stop class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
                             <h2 class="text-2xl font-bold">Impressum | hypnofunk.de</h2>
                             <div>
                                 <p class="mt-2 text-gray-600"><span class="font-bold">Name: </span>${this.modals.impressum.firstName} ${this.modals.impressum.lastName}</p>
@@ -406,7 +406,7 @@ document.addEventListener('alpine:init', () => {
 
                     <!-- Panel -->
                     <div x-show="openDatenschutz" x-transition x-on:click="openDatenschutz = false" class="relative flex min-h-screen items-center justify-center p-4">
-                        <div x-on:click.stop x-trap.noscroll.inert="openDatenschutz" class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
+                        <div x-on:click.stop class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
                             <h2 class="text-2xl font-bold">${this.modals.datenschutz.title}</h2>
                             <div>
                                 <p class="mt-2 text-gray-600">${this.modals.datenschutz.content}</p>
