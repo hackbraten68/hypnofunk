@@ -5,18 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hypnofunk.de</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script
-      defer
-      src="https://unpkg.com/@alpinejs/ui@3.13.1-beta.0/dist/cdn.min.js"
-    ></script>
-    <script
-      defer
-      src="https://unpkg.com/@alpinejs/focus@3.13.1/dist/cdn.min.js"
-    ></script>
-    <script
-      defer
-      src="https://unpkg.com/alpinejs@3.13.1/dist/cdn.min.js"
-    ></script>
+    <script defer src="/js/alpine.min.js"></script>
+
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
@@ -112,31 +102,33 @@
         </section>
       </div>
 
+      <!-- FOOTER -->
       <div 
         x-data="imprintModal()"
         x-init="initModal()"
-        >
+      >
         <footer>
           <div class="footer__container">
-            <span
-              >© <span id="currentYear"></span>
-              <a href="https://hypnofunk.de/" class="hover:underline">Hypnofunk</a
-              >. All Rights Reserved.
-            </span>
-            <span>Coded with 🤍</span>
-            <ul>
-              <li>
-                <a href="#" x-on:click.prevent="open = true" class="hover:underline me-4 md:me-6 font-normal">Impressum</a>
-              </li>
-            </ul>
+              <span>
+                  © <span id="currentYear"></span>
+                  <a href="https://hypnofunk.de/" class="hover:underline">Hypnofunk</a>. All Rights Reserved.
+              </span>
+              <span>Coded with 🤍</span>
+              <ul>
+                  <li>
+                      <a href="#" x-on:click.prevent="openImpressum = true" class="hover:underline me-4 md:me-6 font-normal">Impressum</a>
+                  </li>
+                  <li>
+                      <a href="#" x-on:click.prevent="openDatenschutz = true" class="hover:underline me-4 md:me-6 font-normal">Datenschutzerklärung</a>
+                  </li>
+              </ul>
           </div>
         </footer>
         <div id="modalContainer"></div>
       </div>
-    </div>
     
     <!-- COOKIE MESSAGE -->
-    <div class="cookies" id="cookies-banner">
+    <div x-data="cookieBanner()" class="cookies" id="cookies-banner" x-show="visible" x-transition.opacity>
       <div id="cookies-text">
         🍪 Cookie Hinweis: Hypnofunk.de sammelt keine Cookies 🍪
       </div>
@@ -151,28 +143,41 @@
   }
 
   // COOKIE MESSAGE
-  document.addEventListener('DOMContentLoaded', () => {
-  const banner = document.querySelector('.cookies');
+  function cookieBanner() {
+    return {
+      visible: false,
 
-  function showBanner() {
-    banner.classList.add('show');
-    console.log("Cookie Banner set to show");
+      init() {
+        console.log("Banner init() called");
 
-    setTimeout(() => {
-      banner.classList.remove('show');
-      banner.classList.add('hide');
-      console.log("Cookie Banner set to hide");
-    }, 10000); // Zeigt das Banner für 10 Sekunden
+        // Banner nach 750 ms anzeigen
+        setTimeout(() => {
+          console.log("750ms timeout completed, calling showBanner()");
+          this.showBanner();
+        }, 750);
+      },
 
-    setTimeout(() => {
-      banner.classList.remove('hide');
-      banner.classList.add('hidden');
-      console.log("Cookie Banner set to hidden");
-    }, 10500); // Setzt die Sichtbarkeit nach der Animation auf 'hidden'
+      async showBanner() {
+        console.log("showBanner() called, making banner visible");
+        this.visible = true; // Banner anzeigen
+
+        console.log("Banner should now be visible, waiting 5 seconds before hiding...");
+
+        await new Promise(resolve => setTimeout(resolve, 5000)); // 5 Sekunden anzeigen
+
+        console.log("5 seconds passed, calling hideBanner()");
+        this.hideBanner();
+      },
+
+      hideBanner() {
+        console.log("hideBanner() called, hiding banner");
+        this.visible = false; // Banner ausblenden
+      }
+    }
   }
 
-  // Show the banner after a delay
-  setTimeout(showBanner, 750);
+document.addEventListener('alpine:init', () => {
+  Alpine.data('cookieBanner', cookieBanner);
 });
 
 
@@ -341,81 +346,84 @@
 
   function imprintModal() {
     return {
-      open: false,
-      imprint: [
-        {
-          firstName: 'Max',
-          lastName: 'Mustermann',
-          street: 'Bretanoweg 3',
-          zip: '69126',
-          city: 'Heidelberg',
-          tel: '06221/123456789',
-          contact: 'kontakt@hypnofunk.de',
-          url: 'www.hypnofunk.de',
-          text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.'
-        }
-      ],
+        openImpressum: false,
+        openDatenschutz: false,
+        modals: {
+            impressum: {
+                firstName: 'Max',
+                lastName: 'Mustermann',
+                street: 'Bretanoweg 3',
+                zip: '69126',
+                city: 'Heidelberg',
+                tel: '06221/123456789',
+                contact: 'kontakt@hypnofunk.de',
+                url: 'www.hypnofunk.de',
+                text: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr...'
+            },
+            datenschutz: {
+                title: 'Datenschutzerklärung',
+                content: 'Dies ist die Datenschutzerklärung von Hypnofunk. Hier wird beschrieben, wie wir mit Ihren Daten umgehen...'
+            }
+        },
 
-      imprintHTML: function () {
-        return this.imprint
-          .map(function (entry) {
+        imprintHTML: function() {
             return `
-              <div x-show="open" 
-                style="display: none"
-                x-on:keydown.escape.prevent.stop="open = false"
-                role="dialog" 
-                aria-modal="true" 
-                x-id="['modal-title']" 
-                :aria-labelledby="$id('modal-title')"
-                class="fixed inset-0 imprint-modal__container overflow-y-auto">
-              <!-- Overlay -->
-              <div x-show="open" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
-              
-              <!-- Panel -->
-              <div x-show="open" x-transition
-                  x-on:click="open = false"
-                  class="relative flex min-h-screen items-center justify-center p-4">
-                <div x-on:click.stop
-                    x-trap.noscroll.inert="open"
-                    class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
-                  <!-- Title -->
-                  <h2 class="text-2xl font-bold" :id="$id('modal-title')">Impressum | hypnofunk.de</h2>
-                  
-                  <!-- Content -->
-                  <div>
-                    <p class="mt-2 text-gray-600"><span class="font-bold">Name: </span>${entry.firstName} ${entry.lastName}</p>
-                    <p class="mt-2 text-gray-600"><span class="font-bold">Adresse: </span>${entry.street}, ${entry.zip} ${entry.city}</p>
-                    <p class="mt-2 text-gray-600"><span class="font-bold">Telefon: </span>${entry.tel}</p>
-                  <p class="mt-2 text-gray-600"><span class="font-bold">E-Mail: </span><a href="mailto:${entry.contact}" class="text-blue-600 hover:underline">${entry.contact}</a></p>
-                  <p class="mt-2 text-gray-600"><span class="font-bold">Website: </span><a href="http://${entry.url}" target="_blank" class="text-blue-600 hover:underline">${entry.url}</a></p>
-                    <p class="mt-2 text-gray-600">${entry.text}</p>
-                  </div>
-                  
-                  <!-- Buttons -->
-                  <div class="mt-4 md:mt-8">
-                    <button type="button" x-on:click="open = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">
-                      Schließen
-                    </button>
-                  </div>
+                <div x-show="openImpressum" style="display: none" x-on:keydown.escape.prevent.stop="openImpressum = false" role="dialog" aria-modal="true" class="fixed inset-0 imprint-modal__container overflow-y-auto">
+                    <!-- Overlay -->
+                    <div x-show="openImpressum" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+                    
+                    <!-- Panel -->
+                    <div x-show="openImpressum" x-transition x-on:click="openImpressum = false" class="relative flex min-h-screen items-center justify-center p-4">
+                        <div x-on:click.stop x-trap.noscroll.inert="openImpressum" class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
+                            <h2 class="text-2xl font-bold">Impressum | hypnofunk.de</h2>
+                            <div>
+                                <p class="mt-2 text-gray-600"><span class="font-bold">Name: </span>${this.modals.impressum.firstName} ${this.modals.impressum.lastName}</p>
+                                <p class="mt-2 text-gray-600"><span class="font-bold">Adresse: </span>${this.modals.impressum.street}, ${this.modals.impressum.zip} ${this.modals.impressum.city}</p>
+                                <p class="mt-2 text-gray-600"><span class="font-bold">Telefon: </span>${this.modals.impressum.tel}</p>
+                                <p class="mt-2 text-gray-600"><span class="font-bold">E-Mail: </span><a href="mailto:${this.modals.impressum.contact}" class="text-blue-600 hover:underline">${this.modals.impressum.contact}</a></p>
+                                <p class="mt-2 text-gray-600"><span class="font-bold">Website: </span><a href="http://${this.modals.impressum.url}" target="_blank" class="text-blue-600 hover:underline">${this.modals.impressum.url}</a></p>
+                                <p class="mt-2 text-gray-600">${this.modals.impressum.text}</p>
+                            </div>
+                            <div class="mt-4 md:mt-8">
+                                <button type="button" x-on:click="openImpressum = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>`;
-          })
-        .join("");
-    },
 
-      // Funktion zur Initialisierung und Einfügen ins DOM
-      initModal: function() {
-        const modalContainer = document.getElementById('modalContainer');
-        modalContainer.innerHTML = this.imprintHTML();
-      }
+                <div x-show="openDatenschutz" style="display: none" x-on:keydown.escape.prevent.stop="openDatenschutz = false" role="dialog" aria-modal="true" class="fixed inset-0 datenschutz-modal__container overflow-y-auto">
+                    <!-- Overlay -->
+                    <div x-show="openDatenschutz" x-transition.opacity class="fixed inset-0 bg-black bg-opacity-50"></div>
+
+                    <!-- Panel -->
+                    <div x-show="openDatenschutz" x-transition x-on:click="openDatenschutz = false" class="relative flex min-h-screen items-center justify-center p-4">
+                        <div x-on:click.stop x-trap.noscroll.inert="openDatenschutz" class="relative w-full max-w-2xl overflow-y-auto rounded-xl bg-white p-12 shadow-lg">
+                            <h2 class="text-2xl font-bold">${this.modals.datenschutz.title}</h2>
+                            <div>
+                                <p class="mt-2 text-gray-600">${this.modals.datenschutz.content}</p>
+                            </div>
+                            <div class="mt-4 md:mt-8">
+                                <button type="button" x-on:click="openDatenschutz = false" class="rounded-md border border-gray-200 bg-white px-5 py-2.5">Schließen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        },
+
+        initModal: function() {
+            const modalContainer = document.getElementById('modalContainer');
+            modalContainer.innerHTML = this.imprintHTML();
+        }
     }
-  }
+}
 
 
   document.addEventListener('alpine:init', () => {
     Alpine.data('imprintModal', imprintModal);
     Alpine.data('videoGallery', videoGallery);
+    console.log("Alpine.js initialized, registering cookieBanner()");
+    Alpine.data('cookieBanner', cookieBanner);
   });
 
 
