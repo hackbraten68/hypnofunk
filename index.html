@@ -126,18 +126,21 @@
         </footer>
         <div id="modalContainer"></div>
       </div>
-    
-    <!-- COOKIE MESSAGE -->
-    <div x-data="{ visible: true }" x-show="visible" x-transition.opacity>
-      <div class="cookies">
-          <span>
+
+        <!-- COOKIE MESSAGE -->
+        <div x-data="{ visible: true }"
+             x-init="setTimeout(() => visible = false, 15000)"
+             x-show="visible"
+             x-transition.opacity>
+            <div class="cookies">
+        <span>
             🍪 Hypnofunk.de sammelt keine Cookies 🍪
-          </span>
-          <button @click="visible = false" class="cookies__button rounded">
-              Schließen
-          </button>
-      </div>
-  </div>
+        </span>
+                <button @click="visible = false" class="cookies__button rounded">
+                    Schließen
+                </button>
+            </div>
+        </div>
   </body>
 </html>
 
