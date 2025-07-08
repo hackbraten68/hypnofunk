@@ -405,10 +405,6 @@ footer ul {
   z-index: 2000;
 }
 
-.modalWhiteSpace {
-  white-space: pre-line;
-}
-
 /* DARK MODE */
 
 @media (prefers-color-scheme: dark) {
