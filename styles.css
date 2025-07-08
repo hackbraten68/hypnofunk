@@ -405,7 +405,7 @@ footer ul {
   z-index: 2000;
 }
 
-#modalContainer {
+.modalWhiteSpace {
   white-space: pre-line;
 }
 
